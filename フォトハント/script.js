@@ -1,0 +1,179 @@
+const startScreen = document.getElementById("start-screen");
+const cardScreen = document.getElementById("card-screen");
+const completeScreen = document.getElementById("complete-screen");
+
+const startbutton = document.getElementById("start-button")
+const continuebutton = document.getElementById("continue-button")
+const viewcompletebutton = document.getElementById("view-complete-button")
+const resetbutton = document.getElementById("reset-button")
+
+const grid = document.getElementById("bingo-grid");
+const cameraInput = document.getElementById("camera-input")
+
+
+
+
+const genreData = {
+  "クラス企画": ["101R","102R","103R","104R","105R","106R","107R","108R","109R","201R","202R","203R","204R","205R","206R","207R","208R","209R","301R","302R","303R","304R","305R","306R","307R","308R","309R"],
+  "企画ジャンル・校内": ["射的", "お化け屋敷", "クイズ", "乗り物", "謎解き", "瑞光館", "中庭", "昇降口", "正門", "階段", "廊下(１階)", "廊下(２階)", "廊下(３階)", "廊下(４階)"],
+  "有志・部活動企画": ["生徒会企画", "軽音", "ダンス", "茶道", "花道", "自然科学部", "液体窒素", "棋道部", "美術部", "文芸部", "写真部", "インターアクト", "クイズ研究部", "家庭クラブ", "放送部"],
+  "体育祭": ["横断幕（赤）", "横断幕（青）", "横断幕（緑）", "横断幕（黄）", "枇杷島スポーツセンター", "横断幕", "観戦中の写真", "クラスTシャツ(赤)", "クラスTシャツ(青)", "クラスTシャツ(緑)", "クラスTシャツ(黄)", "玉入れ", "障害物競争", "体操服"],
+  "チャレンジ": ["ピース", "二人でピース", "ジャンプ", "みんなでジャンプ", "ハイタッチ", "手でハート", "指ハート", "チア長", "ブロ長", "２人で写真", "３人で写真", "5人以上で写真", "円陣", "クラスtシャツ2色集合", "クラスtシャツ4色集合", "遠近法を使った写真", "自分と同じ出席番号の人", "同じ部活動の人（3人）", "たくさんの人が集まる写真", "78を手で作る", "先輩・後輩と写真", "同じクラスの人5人と", "同じクラスだった人と", "他クラス同じブロックの人と", "先生と写真", "他学年の人と写真", "後ろ姿", "影絵", "観戦席からの景色", "体育祭終わりの空", "文化祭終わりの空", "高いところから撮った写真", "校舎と空", "ドアップ", "体育祭らしい写真", "文化祭らしい写真", "人がいない場所", "奥行きを感じる写真"],
+  "記念祭のもの": ["記念祭キーホルダー", "記念祭ロゴ", "記念祭ペンライト", "記念祭プログラム", "記念祭２日目の旗", "記念祭３日目の旗", "有志企画ポスター", "クラス看板（1年）", "クラス看板（2年）", "クラス看板（3年）", "オープニングタイムテーブル","後夜祭タイムテーブル"],
+  "ミッケ！": ["「瑞」の字", "ブルーシート", "うちわ", "ストップウォッチ", "チョコレート", "「祭」の字", "校章", "「z」の字", "「1」の字", "「2」の字", "ランキング", "デジタル時計", "楽器", "ギター", "お菓子", "マイク", "かわいいイラスト", "ジュース", "メガホン", "タオル", "サングラス", "はちまき", "水筒", "帽子", "風船", "ティアラ", "メイド服", "チャイナドレス", "コスプレ", "警備係の人", "横断幕係の人", "生徒会", "記念祭準備委員", "記念祭パート長", "双子コーデ", "写真を撮っている人", "アイドル風衣装", "手袋", "全身タイツ", "パイプ椅子", "！マーク", "？マーク", "スピーカー", "スポーツドリンク", "亀", "花", "机", "「78」の数字"],
+  "色・形": ["白色", "赤色", "青色", "黄色", "緑色", "ピンク", "紫色", "黄緑色", "オレンジ色", "虹色", "金色", "銀色", "カラフル", "ハート", "星", "丸", "三角形", "四角形", "リボン", "花柄", "チェック柄", "水玉", "光っているもの", "キラキラしたもの", "大きいもの", "小さいもの", "長いもの", "ふわふわしたもの", "懐かしいもの", "面白いもの"]
+};
+const CENTER_TOPIC = "記念祭1番の思い出";
+
+
+continuebutton.addEventListener("click", () => {
+  currentCard = saved;
+  startScreen.classList.add("hidden");
+  cardScreen.classList.remove("hidden");
+  renderCard(currentCard);
+});
+
+viewcompletebutton.addEventListener("click", () => {
+  currentCard = saved;
+  startScreen.classList.add("hidden");
+  completeScreen.classList.remove("hidden");
+});
+
+
+
+
+function shuffle(array) {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+
+
+function generateCard() {
+  const cells = new Array(9).fill(null);
+  cells[4] = { topic: CENTER_TOPIC, photo: null };
+  const genreNames = shuffle(Object.keys(genreData));
+  
+  const positions = [0, 1, 2, 3, 5, 6, 7, 8];
+  
+  positions.forEach((pos, i) => {
+    const genre = genreNames[i];
+    const topics = genreData[genre];
+    const topic = topics[Math.floor(Math.random() * topics.length)];
+    cells[pos] = { topic: topic, photo: null };
+  });
+  
+  return cells;
+}
+
+
+function renderCard(cells) {
+  grid.innerHTML = "";
+  cells.forEach((cellData, index) => {
+  const cellEl = document.createElement("div");
+  
+  if (cellData.photo) {
+    const img = document.createElement("img");
+    img.src = cellData.photo;
+    cellEl.appendChild(img);
+  } else {
+    cellEl.textContent = cellData.topic;
+  }
+
+  cellEl.addEventListener("click", () => {
+      activeCellIndex = index;
+      document.getElementById("camera-input").click();
+  });
+
+  grid.appendChild(cellEl);
+  });
+
+  saveCard(currentCard)
+}
+
+
+
+function saveCard(cells) {
+  localStorage.setItem("photoBingoCard", JSON.stringify(cells));
+}
+
+function loadCard() {
+  const raw = localStorage.getItem("photoBingoCard");
+  if (raw) {
+    return JSON.parse(raw);
+  } else {
+    return null;
+  }
+}
+
+
+
+let currentCard = null;
+let activeCellIndex = null;
+
+
+
+cameraInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+
+  const reader = new FileReader();
+  
+  reader.onload = (event) => {
+    const dataUrl = event.target.result; 
+    currentCard[activeCellIndex].photo = event.target.result;
+    renderCard(currentCard);
+    
+    if (checkComplete(currentCard)) {
+      cardScreen.classList.add("hidden");
+      completeScreen.classList.remove("hidden");
+    }
+
+  };
+reader.readAsDataURL(file);
+});
+
+
+
+
+startScreen.classList.remove("hidden");
+
+const saved = loadCard();
+
+if (saved && checkComplete(saved)) {
+  viewcompletebutton.classList.remove("hidden");
+} 
+else if (saved) {
+  continuebutton.classList.remove("hidden");
+}
+
+startbutton.addEventListener("click",() => {
+
+  if (saved) {
+    const ok = confirm("すでに保存されているカードがあります。新しく始めると、今までの写真は消えます。よろしいですか?");
+    if (!ok) return;
+  }
+  currentCard = generateCard()
+  renderCard(currentCard)
+  startScreen.classList.add("hidden");
+  cardScreen.classList.remove("hidden");
+  saveCard(currentCard)
+});
+
+
+resetbutton.addEventListener("click",() => {
+  if(confirm("お題を引き直しますか※保存した画像は消去されます")){
+    currentCard = generateCard()
+    renderCard(currentCard)
+  }
+  saveCard(currentCard)
+});
+
+
+
+function checkComplete(cells) {
+  return cells.every((cellData) => cellData.photo);
+}
