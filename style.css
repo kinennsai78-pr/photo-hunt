@@ -7,6 +7,13 @@ h1 {
 .hidden{display: none;}
 
 
+
+#start-screen img {
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+}
+
 #final-card-img {
   max-width: 320px;
   max-height: 420px;

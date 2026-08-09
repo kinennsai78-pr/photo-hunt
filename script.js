@@ -176,6 +176,7 @@ cameraInput.addEventListener("change", (e) => {
     };
     img.src = event.target.result;
   };
+  reader.readAsDataURL(file);
 });
 
 
@@ -248,7 +249,6 @@ const frameConfigs = {
 };
 
 let currentFrame = "yoko";
-
 async function composeFinalImage(cells, frameKey) {
   const config = frameConfigs[frameKey];
   const frameImg = await loadImage(config.src);
@@ -283,7 +283,3 @@ document.getElementById("save-button").addEventListener("click", () => {
   link.download = "photo-hunt-card.png";
   link.click();
 });
-
-
-
-reader
