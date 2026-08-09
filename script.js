@@ -39,6 +39,8 @@ const CENTER_TOPIC = "記念祭1番の思い出";
 
 
 
+
+
 continuebutton.addEventListener("click", () => {
   currentCard = saved;
   startScreen.classList.add("hidden");
@@ -51,6 +53,33 @@ viewcompletebutton.addEventListener("click", () => {
   startScreen.classList.add("hidden");
   completeScreen.classList.remove("hidden");
   updateCompleteImage();
+});
+
+
+startbutton.addEventListener("click",() => {
+
+  if (saved) {
+    const ok = confirm("新しく始めますか？※撮影した写真は消去されます。");
+    if (!ok) return;
+  }
+  currentCard = generateCard()
+  renderCard(currentCard)
+  startScreen.classList.add("hidden");
+  cardScreen.classList.remove("hidden");
+  saveCard(currentCard)
+});
+
+
+resetbutton.addEventListener("click",() => {
+  if(confirm("お題を引き直しますか※保存した画像は消去されます")){
+    currentCard = generateCard()
+    renderCard(currentCard)
+  }
+  saveCard(currentCard)
+});
+
+document.getElementById("home-button").addEventListener("click", () => {
+  location.reload();
 });
 
 
@@ -134,18 +163,19 @@ cameraInput.addEventListener("change", (e) => {
   const reader = new FileReader();
   
   reader.onload = (event) => {
-    const dataUrl = event.target.result; 
-    currentCard[activeCellIndex].photo = event.target.result;
-    renderCard(currentCard);
-    
-    if (checkComplete(currentCard)) {
-      cardScreen.classList.add("hidden");
-      completeScreen.classList.remove("hidden");
-      updateCompleteImage();
-    }
+    const img = new Image();
+    img.onload = () => {
+      currentCard[activeCellIndex].photo = compressImage(img, 800);
+      renderCard(currentCard);
 
+      if (checkComplete(currentCard)) {
+        cardScreen.classList.add("hidden");
+        completeScreen.classList.remove("hidden");
+        updateCompleteImage();
+      }
+    };
+    img.src = event.target.result;
   };
-reader.readAsDataURL(file);
 });
 
 
@@ -162,27 +192,16 @@ else if (saved) {
   continuebutton.classList.remove("hidden");
 }
 
-startbutton.addEventListener("click",() => {
 
-  if (saved) {
-    const ok = confirm("新しく始めますか？※撮影した写真は消去されます。");
-    if (!ok) return;
-  }
-  currentCard = generateCard()
-  renderCard(currentCard)
-  startScreen.classList.add("hidden");
-  cardScreen.classList.remove("hidden");
-  saveCard(currentCard)
-});
-
-
-resetbutton.addEventListener("click",() => {
-  if(confirm("お題を引き直しますか※保存した画像は消去されます")){
-    currentCard = generateCard()
-    renderCard(currentCard)
-  }
-  saveCard(currentCard)
-});
+function compressImage(img, maxWidth) {
+  const scale = Math.min(1, maxWidth / img.width);
+  const canvas = document.createElement("canvas");
+  canvas.width = img.width * scale;
+  canvas.height = img.height * scale;
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  return canvas.toDataURL("image/jpeg", 0.7);
+}
 
 
 
@@ -255,3 +274,16 @@ async function updateCompleteImage() {
   const dataUrl = await composeFinalImage(currentCard, currentFrame);
   document.getElementById("final-card-img").src = dataUrl;
 }
+
+
+document.getElementById("save-button").addEventListener("click", () => {
+  const img = document.getElementById("final-card-img");
+  const link = document.createElement("a");
+  link.href = img.src;
+  link.download = "photo-hunt-card.png";
+  link.click();
+});
+
+
+
+reader
