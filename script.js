@@ -186,12 +186,14 @@ startScreen.classList.remove("hidden");
 
 const saved = loadCard();
 
+
+if (saved) {
+  continuebutton.classList.remove("hidden");
+}
 if (saved && checkComplete(saved)) {
   viewcompletebutton.classList.remove("hidden");
 } 
-else if (saved) {
-  continuebutton.classList.remove("hidden");
-}
+
 
 
 function compressImage(img, maxWidth) {
@@ -276,8 +278,20 @@ async function updateCompleteImage() {
 }
 
 
-document.getElementById("save-button").addEventListener("click", () => {
+document.getElementById("save-button").addEventListener("click", async () => {
   const img = document.getElementById("final-card-img");
+  const response = await fetch(img.src);
+  const blob = await response.blob();
+  const file = new File([blob], "photo-hunt-card.png", { type: blob.type });
+
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: "フォトハント完成カード" });
+      return;
+    } catch (e) {
+     }
+  }
+
   const link = document.createElement("a");
   link.href = img.src;
   link.download = "photo-hunt-card.png";
