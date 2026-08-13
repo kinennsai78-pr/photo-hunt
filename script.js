@@ -78,6 +78,18 @@ resetbutton.addEventListener("click",() => {
   saveCard(currentCard)
 });
 
+
+document.getElementById("go-complete-button").addEventListener("click", () => {
+  if (checkComplete(currentCard)) {
+    cardScreen.classList.add("hidden");
+    completeScreen.classList.remove("hidden");
+    updateCompleteImage();
+  } else {
+    alert("まだ全部のマスが埋まっていません");
+  }
+});
+
+
 document.getElementById("home-button").addEventListener("click", () => {
   location.reload();
 });
