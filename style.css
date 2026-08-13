@@ -1,10 +1,35 @@
+
+.hidden{display: none;}
+
+
+
 h1 {
     color: #f965df;
      font-family: "Dela Gothic One", sans-serif;
      font-style: normal;
 }
 
-.hidden{display: none;}
+h2 {
+    color :#021180;
+}
+
+
+button{
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #021180;
+    order: solid 2px #021180;
+    border-radius: 3px;
+    transition: .4s;
+
+}
+
+
+
+
+
+
 
 
 
