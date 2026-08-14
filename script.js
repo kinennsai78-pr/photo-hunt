@@ -256,8 +256,8 @@ const frameConfigs = {
     src: "frame-tate.jpg",
     canvasWidth: 650,
     canvasHeight: 1076,
-    cellWidth: 158,
-    cellHeight: 157,
+    cellWidth: 176,
+    cellHeight: 176,
     cellPositions: [
       {x: 422, y: 467}, {x: 422, y: 641}, {x: 422, y: 817},
       {x: 246, y: 467}, {x: 246, y: 641}, {x: 246, y: 817},
