@@ -75,11 +75,13 @@ p{
 
 
 button{
-    display: inline-block;
-    padding: 0.3em 1em;
-    color: #ffffff;
-    background-color: #021180;
-    border-radius: 100px;
+  display: inline-block;
+  padding: 0.3em 1em;
+  color: #ffffff;
+  background-color: #021180;
+  border-radius: 100px;
+  width: 30%; 
+  height: 8%;
 }
 
 
