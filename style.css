@@ -10,17 +10,17 @@ body {text-align:center}
 html, body {
   height: 100%;
   margin: 0;
-  overflow: hidden;
 }
 
 .screen {
-  height: 100dvh;
+  min-height: 100dvh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 12px;
-  padding: 80px 16px; 
+  gap: 8px;
+  padding: 100px 25px; 
   box-sizing: border-box;
 }
 
@@ -91,7 +91,7 @@ button{
 
 
 #start-screen img {
-  max-width: 250px;
+  max-width: 180px;
   width: 100%;
   height: auto;
 }
