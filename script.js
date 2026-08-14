@@ -5,7 +5,9 @@ const completeScreen = document.getElementById("complete-screen");
 const startbutton = document.getElementById("start-button")
 const continuebutton = document.getElementById("continue-button")
 const viewcompletebutton = document.getElementById("view-complete-button")
-const resetbutton = document.getElementById("reset-button")
+
+const gocompletebutton = document.getElementById("go-complete-button")
+const changebutton = document.getElementById("change-button")
 
 document.getElementById("yoko-button").addEventListener("click", () => {
   currentFrame = "yoko";
@@ -20,8 +22,6 @@ document.getElementById("tate-button").addEventListener("click", () => {
 
 const grid = document.getElementById("bingo-grid");
 const cameraInput = document.getElementById("camera-input")
-
-
 
 
 const genreData = {
@@ -40,26 +40,9 @@ const CENTER_TOPIC = "記念祭1番の思い出";
 
 
 
-
-continuebutton.addEventListener("click", () => {
-  currentCard = saved;
-  startScreen.classList.add("hidden");
-  cardScreen.classList.remove("hidden");
-  renderCard(currentCard);
-});
-
-viewcompletebutton.addEventListener("click", () => {
-  currentCard = saved;
-  startScreen.classList.add("hidden");
-  completeScreen.classList.remove("hidden");
-  updateCompleteImage();
-});
-
-
 startbutton.addEventListener("click",() => {
-
   if (saved) {
-    const ok = confirm("新しく始めますか？※撮影した写真は消去されます。");
+    const ok = confirm("新しく始めますか？※撮影した写真は消去されます");
     if (!ok) return;
   }
   currentCard = generateCard()
@@ -69,25 +52,37 @@ startbutton.addEventListener("click",() => {
   saveCard(currentCard)
 });
 
+continuebutton.addEventListener("click", () => {
+  currentCard = saved;
+  startScreen.classList.add("hidden");
+  cardScreen.classList.remove("hidden");
+  renderCard(currentCard);
+});
 
-resetbutton.addEventListener("click",() => {
-  if(confirm("お題を引き直しますか※保存した画像は消去されます")){
+
+
+viewcompletebutton.addEventListener("click", () => {
+  currentCard = saved;
+  startScreen.classList.add("hidden");
+  completeScreen.classList.remove("hidden");
+  updateCompleteImage();
+});
+
+
+changebutton.addEventListener("click",() => {
+  if(confirm("お題を引き直しますか？※撮影した画像は消去されます")){
     currentCard = generateCard()
     renderCard(currentCard)
   }
   saveCard(currentCard)
 });
 
-
-document.getElementById("go-complete-button").addEventListener("click", () => {
-  if (checkComplete(currentCard)) {
-    cardScreen.classList.add("hidden");
-    completeScreen.classList.remove("hidden");
-    updateCompleteImage();
-  } else {
-    alert("まだ全部のマスが埋まっていません");
-  }
+gocompletebutton.addEventListener("click", () => {
+  cardScreen.classList.add("hidden");
+  completeScreen.classList.remove("hidden");
+  updateCompleteImage();
 });
+
 
 
 document.getElementById("home-button").addEventListener("click", () => {
@@ -204,6 +199,7 @@ if (saved) {
 }
 if (saved && checkComplete(saved)) {
   viewcompletebutton.classList.remove("hidden");
+  gocompletebutton.classList.remove("hidden");
 } 
 
 
