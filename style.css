@@ -2,21 +2,34 @@
 .hidden{display: none;}
 
 
+
+body {text-align:center}
+
+
+
+
+
 header {
+  position: fixed;
+   top: 0;
+   left: 0;
   width: 100%;
   padding: 15px 0;
   margin: 0 auto;
   margin-bottom: 10px;
-  text-align: center;
   background-color :#021180;
 }
 
 
 footer {
+  position: fixed;
+   bottom: 0;
+   left: 0;
   width: 100%;
   padding: 15px 0;
   margin: 0 auto;
   margin-top: 20px;
+  padding: 1rem;
   text-align: center;
   background-color :#021180;
 }
@@ -28,11 +41,17 @@ h1 {
     color: #f965df;
      font-family: "Dela Gothic One", sans-serif;
      font-style: normal;
+    justify-content: center
 }
 
 h2 {
     margin: 0 auto;
     color :#021180;
+    justify-content: center
+}
+
+p{
+    justify-content: center
 }
 
 
@@ -41,6 +60,7 @@ button{
     padding: 0.3em 1em;
     color: #ffffff;
     background-color: #021180;
+    border-radius: 100px;
 }
 
 
@@ -68,7 +88,7 @@ button{
 
 #bingo-grid > div {
   aspect-ratio: 1 / 1;
-  border: 2px solid #111;
+  border: 2px solid #021180;
   border-radius: 6px;
   overflow: hidden;
   display: flex;
@@ -80,6 +100,8 @@ button{
   box-sizing: border-box;
 }
 
+
+
 #bingo-grid > div img {
   width: 100%;
   height: 100%;
@@ -89,6 +111,5 @@ button{
 #final-card-img {
   max-width: 320px;
   max-height: 420px;
-  width: auto;
-  height: auto;
+ 
 }
