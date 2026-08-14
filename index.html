@@ -14,7 +14,7 @@
 <body>
     <header></header>
 
-    <section id="start-screen" class="hidden">
+    <section id="start-screen" class="hidden screen">
         <p>第78回記念祭　特別企画</p>
         <h2>～撮って！巡って！～</h2>
         <h1>記念祭フォトハント</h1>
@@ -28,19 +28,21 @@
         <button id="view-complete-button" class="hidden">カードを見る</button>
     </section>
 
-    <section id="card-screen" class="hidden">
+    <section id="card-screen" class="hidden screen">
         <h1>あなたのカード</h1>
         <div id="bingo-grid"></div>
         <input type="file" id="camera-input" accept="image/*" capture="environment" class="hidden">
         <button id="change-button">お題チェンジ</button>
-        <button id="go-complete-button">完成カードを見る</button>
+        <button id="go-complete-button" class="hidden">完成カードを見る</button>
         
     </section>
 
-    <section id="complete-screen" class="hidden">
+    <section id="complete-screen" class="hidden screen">
         <h2>全マスクリア</h2>
         <h1>おめでとう！！</h1>
-        <img id="final-card-img" alt="完成したカード">
+        <div class="image-frame">
+            <img id="final-card-img" alt="完成したカード">
+        </div>
 
         <div class="button-row">
             <button id="yoko-button">横</button>

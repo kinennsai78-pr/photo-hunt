@@ -78,9 +78,11 @@ changebutton.addEventListener("click",() => {
 });
 
 gocompletebutton.addEventListener("click", () => {
-  cardScreen.classList.add("hidden");
-  completeScreen.classList.remove("hidden");
-  updateCompleteImage();
+  if (checkComplete(currentCard)) {
+    cardScreen.classList.add("hidden");
+    completeScreen.classList.remove("hidden");
+    updateCompleteImage();
+  }
 });
 
 
@@ -142,7 +144,13 @@ function renderCard(cells) {
   grid.appendChild(cellEl);
   });
 
-  saveCard(currentCard)
+  saveCard(currentCard);
+
+  if (checkComplete(cells)) {
+    gocompletebutton.classList.remove("hidden");
+  } else {
+    gocompletebutton.classList.add("hidden");
+  }
 }
 
 
@@ -236,8 +244,8 @@ const frameConfigs = {
     src: "frame-yoko.jpg",
     canvasWidth: 1076,
     canvasHeight: 650,
-    cellWidth: 158,
-    cellHeight: 159,
+    cellWidth: 176,
+    cellHeight: 176,
     cellPositions: [
       {x: 497, y: 69},  {x: 671, y: 69},  {x: 847, y: 69},
       {x: 497, y: 245}, {x: 671, y: 245}, {x: 847, y: 245},
