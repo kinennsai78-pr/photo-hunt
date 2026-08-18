@@ -124,8 +124,8 @@ button{
 
 
 #bingo-grid > div img {
-  width: 100%;
-  height: 100%;
+  width: 108%;
+  height: 108%;
   object-fit: cover;
 }
 
