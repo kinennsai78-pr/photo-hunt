@@ -55,11 +55,8 @@ footer {
 
 
 
-h1 {
-    margin: 0 auto;
-    
-     font-family: "Dela Gothic One", sans-serif;
-     font-style: normal;
+h1 {margin: 0 auto;
+    width: 100%;
     justify-content: center
 }
 
@@ -90,6 +87,9 @@ button{
 
 
 
+#complete-screen{
+  background-color: #dcdcdc;
+}
 
 
 
