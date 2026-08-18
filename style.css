@@ -57,7 +57,7 @@ footer {
 
 h1 {
     margin: 0 auto;
-    color: #f965df;
+    
      font-family: "Dela Gothic One", sans-serif;
      font-style: normal;
     justify-content: center
@@ -75,13 +75,14 @@ p{
 
 
 button{
+  font-size: 150%;
   display: inline-block;
   padding: 0.3em 1em;
   color: #ffffff;
   background-color: #021180;
   border-radius: 100px;
-  width: 30%; 
-  height: 8%;
+  width: 50%; 
+  height: 30%;
 }
 
 
@@ -93,7 +94,6 @@ button{
 
 
 #start-screen img {
-  max-width: 200px;
   width: 100%;
   height: auto;
 }
