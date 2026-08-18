@@ -77,7 +77,7 @@ button{
   padding: 0.3em 1em;
   color: #ffffff;
   background-color: #021180;
-  border-radius: 100px;
+  border-radius: 10px;
   width: 50%; 
   height: 30%;
 }
@@ -88,7 +88,7 @@ button{
 
 
 #complete-screen{
-  background-color: #dcdcdc;
+  background-color: #f5f5f5;
 }
 
 
