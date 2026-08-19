@@ -241,7 +241,7 @@ function loadImage(src) {
 
 const frameConfigs = {
   yoko: {
-    src: "frame-yoko.png",
+    src: "frame-yoko.jpg",
     canvasWidth: 1076,
     canvasHeight: 650,
     cellWidth: 176,
@@ -253,7 +253,7 @@ const frameConfigs = {
     ]
   },
   tate: {
-    src: "frame-tate.png",
+    src: "frame-tate.jpg",
     canvasWidth: 650,
     canvasHeight: 1076,
     cellWidth: 176,
