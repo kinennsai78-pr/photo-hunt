@@ -90,11 +90,13 @@ button{
 .button-row {
   display: flex;
   gap: 10px;
-  width: 100%;
+  width: 30%;
   justify-content: center;
+ 
 }
 
 .button-row button {
+  border-radius: 100px;
   width: auto;
   flex: 1;
 }
