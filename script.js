@@ -127,14 +127,17 @@ function generateCard() {
 function renderCard(cells) {
   grid.innerHTML = "";
   cells.forEach((cellData, index) => {
-  const cellEl = document.createElement("div");
+    const cellEl = document.createElement("div");
   
-  if (cellData.photo) {
+    if (cellData.photo) {
     const img = document.createElement("img");
     img.src = cellData.photo;
     cellEl.appendChild(img);
   } else {
-    cellEl.textContent = cellData.topic;
+    const inner = document.createElement("div");
+    inner.className = "cell-inner";
+    inner.textContent = cellData.topic;
+    cellEl.appendChild(inner);
   }
 
   cellEl.addEventListener("click", () => {
