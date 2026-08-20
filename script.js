@@ -9,6 +9,7 @@ const viewcompletebutton = document.getElementById("view-complete-button")
 const gocompletebutton = document.getElementById("go-complete-button")
 const changebutton = document.getElementById("change-button")
 
+
 document.getElementById("yoko-button").addEventListener("click", () => {
   currentFrame = "yoko";
   updateCompleteImage();
@@ -265,6 +266,7 @@ const frameConfigs = {
     ]
   }
 };
+
 
 let currentFrame = "yoko";
 async function composeFinalImage(cells, frameKey) {
