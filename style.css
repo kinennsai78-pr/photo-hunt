@@ -107,6 +107,7 @@ button{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 5px;
+  width: 100%;
   max-width: 340px;
   margin: 16px auto;
 }
