@@ -135,8 +135,6 @@ button{
   margin: 16px auto;
 }
 
-
-
 #bingo-grid > div {
   position: relative;
   width: 100%;
@@ -168,7 +166,6 @@ button{
   height: 100%;
   object-fit: cover;
 }
-
 
 .image-frame {
   width: 280px;
